@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include <kibble/logger/logger.h>
-#include <kibble/logger/logger_sink.h>
-#include <kibble/logger/logger_thread.h>
+#include <kibble/logger/sink.h>
+#include <kibble/logger/dispatcher.h>
 
 #include "webcam.h"
 #include "common.h"
@@ -15,10 +15,7 @@ void init_logger()
     KLOGGER_START();
     KLOGGER(create_channel("camscii", 3));
     KLOGGER(attach_all("console_sink", std::make_unique<klog::ConsoleSink>()));
-    KLOGGER(set_single_threaded(true));
     KLOGGER(set_backtrace_on_error(false));
-    KLOGGER(spawn());
-    KLOGGER(sync());
 }
 
 int main(int argc, char** argv)
